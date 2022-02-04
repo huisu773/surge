@@ -47,7 +47,7 @@ if (!v4.primaryAddress && !v6.primaryAddress) {
     if (error) {
       $done({
         title: '发生错误',
-        content: '无法获得目前网络信息\n请检查网络状态后重试',
+        content: '无法获得当前网络信息\n请检查网络状态后重试',
         icon: 'wifi.exclamationmark',
         'icon-color': '#CB1B45',
       });
