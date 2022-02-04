@@ -2,7 +2,6 @@
  * Surge 網路詳情面板
  * @Nebulosa-Cat
  * 詳情請見 README
- * 简体中文版
  */
 const { wifi, v4, v6 } = $network;
 
@@ -28,8 +27,8 @@ const carrierNames = loadCarrierNames();
 
 if (!v4.primaryAddress && !v6.primaryAddress) {
   $done({
-    title: '没有网络',
-    content: '尚未连接网络\n请检查网络状态后重试',
+    title: '沒有網路',
+    content: '尚未連接網際網路\n請檢查網際網路狀態後重試',
     icon: 'wifi.exclamationmark',
     'icon-color': '#CB1B45',
   });
@@ -40,14 +39,14 @@ if (!v4.primaryAddress && !v6.primaryAddress) {
     if (carrierId && radio) {
       cellularInfo = carrierNames[carrierId] ?
         carrierNames[carrierId] + ' | ' + radioGeneration[radio] + ' - ' + radio :
-        '移动数据 | ' + radioGeneration[radio] + ' - ' + radio;
+        '行動數據 | ' + radioGeneration[radio] + ' - ' + radio;
     }
   }
   $httpClient.get('http://ip-api.com/json', function (error, response, data) {
     if (error) {
       $done({
-        title: '发生错误',
-        content: '无法获取目前网络信息\n请检查网络状态后重试',
+        title: '發生錯誤',
+        content: '無法獲得目前網路資訊\n請檢查網際網路狀態後重試',
         icon: 'wifi.exclamationmark',
         'icon-color': '#CB1B45',
       });
@@ -61,9 +60,9 @@ if (!v4.primaryAddress && !v6.primaryAddress) {
         (v6.primaryAddress ? `IPv6 : ${v6.primaryAddress}\n` : '') +
         (v4.primaryRouter && wifi.ssid ? `Router IPv4 : ${v4.primaryRouter}\n` : '') +
         (v6.primaryRouter && wifi.ssid ? `Router IPv6 : ${v6.primaryRouter}\n` : '') +
-        `节点 IP : ${info.query}\n` +
-        `节点 ISP : ${info.isp}\n` +
-        `节点位置 : ${getFlagEmoji(info.countryCode)} | ${info.country} - ${info.city
+        `節點 IP : ${info.query}\n` +
+        `節點 ISP : ${info.isp}\n` +
+        `節點位置 : ${getFlagEmoji(info.countryCode)} | ${info.country} - ${info.city
         }`,
       icon: wifi.ssid ? 'wifi' : 'simcard',
       'icon-color': wifi.ssid ? '#005CAF' : '#F9BF45',
@@ -83,9 +82,9 @@ function loadCarrierNames() {
   //整理邏輯:前三碼相同->後兩碼同電信->剩下的
   return {
     //台灣電信業者 Taiwan
-    '466-11': '中华电信', '466-92': '中华电信',
-    '466-01': '远传电信', '466-03': '远传电信',
-    '466-97': '台湾大哥大', '466-89': '台湾之星', '466-05': 'GT',
+    '466-11': '中華電信', '466-92': '中華電信',
+    '466-01': '遠傳電信', '466-03': '遠傳電信',
+    '466-97': '台灣大哥大', '466-89': '台灣之星', '466-05': 'GT',
     //中國電信業者 China
     '460-03': '中国电信', '460-05': '中国电信', '460-11': '中国电信',
     '460-01': '中国联通', '460-06': '中国联通', '460-09': '中国联通',
@@ -97,7 +96,7 @@ function loadCarrierNames() {
     '454-06': 'SMC HK', '454-15': 'SMC HK', '454-17': 'SMC HK',
     '454-09': 'CMHK', '454-12': 'CMHK', '454-13': 'CMHK', '454-28': 'CMHK', '454-31': 'CMHK',
     '454-16': 'csl.', '454-19': 'csl.', '454-20': 'csl.', '454-29': 'csl.',
-    '454-01': '中信国际电讯', '454-07': 'UNICOM HK', '454-08': 'Truphone', '454-11': 'CHKTL', '454-23': 'Lycamobile',
+    '454-01': '中信國際電訊', '454-07': 'UNICOM HK', '454-08': 'Truphone', '454-11': 'CHKTL', '454-23': 'Lycamobile',
     //日本電信業者 Japan
     '440-00': 'Y!mobile', '440-10': 'docomo', '440-11': 'Rakuten', '440-20': 'SoftBank',
     '440-50': ' au', '440-51': ' au', '440-52': ' au', '440-53': ' au', '440-54': ' au',
@@ -120,4 +119,3 @@ function loadCarrierNames() {
     '452-01': 'Mobifone', '452-02': 'VinaPhone', '452-03': 'S-Fone', '452-04': 'Viettel', '452-05': 'VietNamobile', '452-06': 'E-mobile', '452-07': 'Gmobile',
   };  
 }
-
