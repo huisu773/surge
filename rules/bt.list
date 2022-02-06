@@ -8,7 +8,7 @@ PROCESS-NAME,Transmission
 PROCESS-NAME,uTorrent
 PROCESS-NAME,WebTorrent
 PROCESS-NAME,WebTorrent Helper
-PROCESS-NAME,qBittorrent
+PROCESS-NAME,qbittorrent
 # bt
 DOMAIN-SUFFIX,smtp
 DOMAIN-KEYWORD,aria2
