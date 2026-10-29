@@ -1,5 +1,4 @@
 #!name=粉笔 App 去广告
-#!desc=开屏/弹窗去广告；首页 Banner 改为 200+data:null，避免 reject 造成留白。需 MITM。保留 type=15 课程入口。
 #!category=广告拦截
 
 [MITM]
