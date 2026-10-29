@@ -1,0 +1,32 @@
+#!name=粉笔 App 去广告
+#!desc=开屏/弹窗去广告；首页 Banner 改为 200+data:null，避免 reject 造成留白。需 MITM。保留 type=15 课程入口。
+#!category=广告拦截
+
+[MITM]
+hostname = %APPEND% keapi.fenbi.com, algo.fenbi.com, nodestatic.fbstatic.cn, fb.fbstatic.cn
+
+[Map Local]
+^https?://keapi\.fenbi\.com/app/.+/position_resource/get_home_banners_v2 data-type=text data="{\"code\":-1,\"msg\":\"\",\"data\":null}" status-code=200
+^https?://keapi\.fenbi\.com/app/.+/position_resource/get_home_banners\?.*position_resource_type=14 data-type=text data="{\"code\":-1,\"msg\":\"暂无推荐课程\",\"data\":null}" status-code=200
+
+^https?://keapi\.fenbi\.com/app/.+/position_resource/get_banners\?.*position_resource_type=8 data-type=text data="{\"code\":1,\"msg\":\"\",\"data\":{\"positionResourceType\":8,\"payload\":{\"items\":[]},\"adTracking\":null}}" status-code=200
+^https?://keapi\.fenbi\.com/app/.+/position_resource/get_banners\?.*position_resource_type=3 data-type=text data="{\"code\":1,\"msg\":\"\",\"data\":{\"positionResourceType\":3,\"payload\":null,\"adTracking\":null}}" status-code=200
+^https?://keapi\.fenbi\.com/app/.+/position_resource/get_banners\?.*position_resource_type=10 data-type=text data="{\"code\":1,\"msg\":\"\",\"data\":{\"positionResourceType\":10,\"payload\":null,\"adTracking\":null}}" status-code=200
+
+[URL Rewrite]
+^https?://algo\.fenbi\.com/algo-ad-slot-log/ - reject
+^https?://keapi\.fenbi\.com/app/.+/popup/callback - reject
+^https?://nodestatic\.fbstatic\.cn/popup/ - reject
+^https?://fb\.fbstatic\.cn/api/ape-images/ - reject
+
+[Rule]
+DOMAIN,utoken.umeng.com,REJECT
+DOMAIN,ulogs.umeng.com,REJECT
+DOMAIN,ulogs.umengcloud.com,REJECT
+DOMAIN-SUFFIX,umeng.com,REJECT
+DOMAIN-SUFFIX,umengcloud.com,REJECT
+DOMAIN,api.mixpanel.com,REJECT
+DOMAIN,quicktracking-api.fenbi.com,REJECT
+DOMAIN,fenbi-ios.cn-beijing.log.aliyuncs.com,REJECT
+DOMAIN,algo.fenbi.com,REJECT
+URL-REGEX,^https?://keapi\.fenbi\.com/cooperation/api/idfas/active,REJECT
